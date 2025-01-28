@@ -6,7 +6,7 @@ const schedule = require('node-schedule');
 const client = new Client({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages],
 });
-const channelId = process.env.CHANNEL_ID;
+const channelId = process.env.DISCORD_CHANNEL_ID;
 
 async function fetchFreeGame() {
   try {
@@ -48,10 +48,10 @@ client.once('ready', async () => {
   console.log(`Logged in as ${client.user.tag}!`);
 
   // Schedule the bot to send a message every Thursday at 11:00 UTC
-  //   schedule.scheduleJob('* * * * *', async () => {
-  // const channel = await client.channels.fetch(channelId);
+  //   schedule.scheduleJob('* * * * *', async () => {   // Scheduling temporarily turned off
+  const channel = await client.channels.fetch(channelId);
   const message = await fetchFreeGame();
-  // channel.send(message);
+  // channel.send(message); // Message sending off for testing
   //   });
 });
 
