@@ -1,27 +1,33 @@
+## Both:
 
-**Both:**
-
-Install dependencies:
+**Install dependencies:**
 
 npm i
 
-Create a .env File (in 'functions' subfolder for Firebase)
+**Create a .env File (in 'functions' subfolder for Firebase):**
 
+```
 DISCORD_TOKEN=your_discord_bot_token
 CHANNEL_ID=your_channel_id
+```
 
-**Firebase**
+## Firebase
 
-Install Firebase-specific dependencies:
+**Install Firebase-specific dependencies:**
 
+```
 npm install -g firebase-tools
 firebase login
+```
 
-Deploy:
+**Deploy:**
 
 firebase deploy --only functions
 
-**Local**
+## Local
 
-Run:
+**Run:**
+
+```
 node bot.js
+```
