@@ -2,7 +2,9 @@
 
 **Install dependencies:**
 
+```
 npm i
+```
 
 **Create a .env File (in 'functions' subfolder for Firebase):**
 
