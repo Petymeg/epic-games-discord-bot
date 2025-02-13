@@ -24,7 +24,9 @@ firebase login
 
 **Deploy:**
 
+```
 firebase deploy --only functions
+```
 
 ## Local
 
