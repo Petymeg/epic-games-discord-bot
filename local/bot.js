@@ -16,7 +16,11 @@ async function fetchFreeGame() {
     const games = response.data.data.Catalog.searchStore.elements;
 
     const freeGames = games.filter(
-      (game) => game.promotions && game.promotions.promotionalOffers.length > 0
+      (game) =>
+        game.promotions &&
+        game.promotions.promotionalOffers.length > 0 &&
+        game.promotions.promotionalOffers[0].promotionalOffers[0]
+          .discountSetting.discountPercentage === 0
     );
 
     if (freeGames.length === 0)
@@ -25,6 +29,7 @@ async function fetchFreeGame() {
     let message = '**Heti ingyenes Epic játék(ok):**\n';
 
     freeGames.forEach((game) => {
+      console.log(JSON.stringify(game));
       const title = game.title;
       const url = `https://store.epicgames.com/p/${game.catalogNs.mappings[0].pageSlug}`;
       const offerEndDate = new Date(

@@ -18,7 +18,11 @@ async function fetchFreeGame() {
     const games = response.data.data.Catalog.searchStore.elements;
 
     const freeGames = games.filter(
-      (game) => game.promotions && game.promotions.promotionalOffers.length > 0
+      (game) =>
+        game.promotions &&
+        game.promotions.promotionalOffers.length > 0 &&
+        game.promotions.promotionalOffers[0].promotionalOffers[0]
+          .discountSetting.discountPercentage === 0
     );
 
     if (freeGames.length === 0)
