@@ -33,11 +33,26 @@ async function fetchFreeGame() {
     let message = '**Heti ingyenes Epic játék(ok):**\n';
     freeGames.forEach((game) => {
       const title = game.title;
-      const url = `https://store.epicgames.com/p/${game.catalogNs.mappings[0].pageSlug}`;
+      const url = `https://store.epicgames.com/p/${game.productSlug}`;
       const offerEndDate = new Date(
         game.promotions.promotionalOffers[0].promotionalOffers[0].endDate
       );
-      message += `🎮 **${title}**\n🔗 [Húzd be itt](${url})\n🕒 Eddig érhető el ingyen: ${offerEndDate.toLocaleString()}\n\n`;
+      const localizedEndDate = offerEndDate.toLocaleString('se-SE', {
+        timeZone: 'Europe/Budapest',
+      });
+      const formattedEndDate = localizedEndDate
+        .replaceAll('-', '.')
+        .replace(' ', '. ');
+      const offerEndHour = localizedEndDate.substring(
+        localizedEndDate.indexOf(' ') + 1,
+        localizedEndDate.indexOf(' ') + 3
+      );
+      const offerEndHourForEmoji = offerEndHour % 12 ? offerEndHour % 12 : 12;
+      const offerEndMinute =
+        offerEndDate.getMinutes() % 60 ? offerEndDate.getMinutes() % 60 : '';
+      const offerEndTimeEmoji = `:clock${offerEndHourForEmoji}${offerEndMinute}:`;
+
+      message += `\n🎮 **${title}**\n🔗 [Húzd be itt](${url})\n${offerEndTimeEmoji} Eddig érhető el ingyen: ${formattedEndDate}\n\n`;
     });
     console.log(message);
     return message;
