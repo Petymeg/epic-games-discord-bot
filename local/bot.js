@@ -31,7 +31,8 @@ async function fetchFreeGame() {
     freeGames.forEach((game) => {
       console.log(JSON.stringify(game));
       const title = game.title;
-      const url = `https://store.epicgames.com/p/${game.productSlug}`;
+      const pageSlug = game.productSlug || game.catalogNs.mappings[0].pageSlug;
+      const url = `https://store.epicgames.com/p/${pageSlug}`;
       const offerEndDate = new Date(
         game.promotions.promotionalOffers[0].promotionalOffers[0].endDate
       );
